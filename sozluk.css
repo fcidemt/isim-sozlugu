@@ -1,0 +1,43 @@
+.jumbotron{
+  text-align: center;
+  font-family: 'Exo';
+  background: #777177;
+}
+
+img{
+  width: 5em;
+  height: 5em;
+  margin-bottom: 30px;
+}
+
+.borders{
+  border: 8px double black;
+  padding: 20px;
+  width: 10em;
+}
+
+form{
+  font-family: 'Exo';
+}'sozluk.html'
+
+
+.btn{
+  background-color: #777177;
+  margin-bottom:20px;
+}
+
+p{
+  font-family: 'Exo';
+  text-align: center;
+}
+
+h5{
+  text-align: center;
+}
+
+table{
+  font-family: 'Exo';
+  text-align:center;
+  border: 1px solid #777177;
+  min-width:500px;
+}
