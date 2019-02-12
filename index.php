@@ -12,42 +12,14 @@
     $ad = mysqli_real_escape_string($cnnMySQL, $_POST["ad"]);
     $soyad = mysqli_real_escape_string($cnnMySQL, $_POST["soyad"]);
     $cinsiyet = mysqli_real_escape_string($cnnMySQL, $_POST["cinsiyet"]);
+    $arrWhere = array();
+    $arrWhere[] = 1;
+    if($ad       <> "") $arrWhere[] = " ad LIKE '%$ad%' ";
+    if($soyad    <> "") $arrWhere[] = " soyad LIKE '%$soyad%' ";
+    if($cinsiyet <> "") $arrWhere[] = " cinsiyet LIKE '%$cinsiyet%' ";
+    $SuzmeKosulu = implode(" AND ", $arrWhere);
+    $SQL = "SELECT * FROM isim_sozlugu WHERE $SuzmeKosulu";
 
-    if($ad != "" && $soyad != "" && $cinsiyet != ""){
-      $SQL = "SELECT * FROM isim_sozlugu
-            WHERE  ad LIKE '%$ad%' AND soyad LIKE '%$soyad%' AND cinsiyet LIKE '%$cinsiyet%'
-            ORDER BY ad";
-    }
-    elseif($ad != "" && $soyad != ""){
-      $SQL = "SELECT * FROM isim_sozlugu
-          WHERE ad LIKE '%$ad%' AND soyad LIKE '%$soyad%'
-          ORDER BY ad";
-    }
-    elseif($ad != "" && $cinsiyet != ""){
-      $SQL = "SELECT * FROM isim_sozlugu
-              WHERE ad LIKE '%$ad%' AND cinsiyet LIKE '%$cinsiyet%'
-              ORDER BY ad";
-    }
-    elseif($soyad != "" && $cinsiyet != ""){
-      $SQL = "SELECT * FROM isim_sozlugu
-              WHERE soyad LIKE '%$soyad%' AND cinsiyet LIKE '%$cinsiyet%'
-              ORDER BY ad";
-    }
-    elseif($ad != ""){
-      $SQL = "SELECT * FROM isim_sozlugu
-              WHERE ad LIKE '%$ad%'
-              ORDER BY ad";
-    }
-    elseif($soyad != ""){
-      $SQL = "SELECT * FROM isim_sozlugu
-              WHERE soyad LIKE '%$soyad%'
-              ORDER BY ad";
-    }
-    elseif($cinsiyet != ""){
-      $SQL = "SELECT * FROM isim_sozlugu
-              WHERE cinsiyet LIKE '%$cinsiyet%'
-              ORDER BY ad";
-    }
     $rows = mysqli_query($cnnMySQL, $SQL);
     $RowCount = mysqli_num_rows($rows);
     if($RowCount == 0) {
